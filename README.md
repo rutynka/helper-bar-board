@@ -1,10 +1,7 @@
 <h1 align="center">
-	<br>
-	<br>
     <a href="https://rutynka.io">
 	<img width="820" src="public/bar_board_screenshot.png" alt="screenshot">
 	</a>
-	<br>
 	<br>
 </h1>
 *Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
@@ -20,15 +17,15 @@ This is a svelte bar board helper for [Rutynka](https://rutynka.io) apps.
 Install the dependencies...
 
 ```bash
-npx degit rutynka/helper-bar-board
+npx degit rutynka/helper-bar-board#main helper-bar-board
 cd helper-bar-board
-npm install
+yarn install
 ```
 
 ...then start [Rollup](https://rollupjs.org):
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
