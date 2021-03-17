@@ -1,12 +1,14 @@
 {
   "name": "@rutynka/helper-bar-board",
   "author": "ru7ynk4",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Svelte super simple sticky bar with timer & counter. The easiest way to display text on the bar is through js public method",
-  "module": "public/build/bb.js",
-  "main": "public/build/bb.js",
+  "svelte": "src/main.js",
+  "module": "dist/bb.mjs",
+  "main": "dist/bb.js",
+  "unpkg": "dist/bb.js",
   "files": [
-    "public/build/bb.js"
+    "dist/bb.js"
   ],
   "keywords": [
     "svelte",
@@ -17,9 +19,10 @@
     "rutynka"
   ],
   "scripts": {
-    "build": "rollup -c;./deploy.sh",
+    "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "test": "echo \"No test specified\""
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
