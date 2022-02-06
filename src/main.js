@@ -1,10 +1,13 @@
 import App from './Bar.svelte';
-
+let anchor = document.body.firstChild;
+if (document.getElementsByTagName('nav').length) {
+	anchor = document.getElementsByTagName('nav')[0].nextElementSibling
+}
 const bb = new App({
-	// target: document.body,
-	target: document.body.getElementsByTagName('main')[0],
-	// anchor: document.body.firstChild,
-	anchor: document.getElementById('userContent'),
+	target: document.body,
+	// target: document.body.getElementsByTagName('main')[0],
+	// anchor: document.getElementById('userContent').firstChild,
+	anchor: anchor,
 	props: {
 	}
 });

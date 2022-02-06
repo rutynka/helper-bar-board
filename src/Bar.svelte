@@ -23,6 +23,10 @@
 		let t = document.getElementById('boardTimer')
 		return t ? t.getAttribute('data-timer') : 0
 	}
+	export const set_color = function (x) {
+		let r = document.querySelector(':root');
+		r.style.setProperty('--bb-color', x);
+	}
 
 	$: question
 	$: correct
@@ -38,7 +42,7 @@
 		reset = false
 	}
 
-	console.log('bar board loaded v 0.0.3')
+	console.log('bb helper v0.0.6')
 </script>
 
 <bb-helper id="bb">
@@ -55,12 +59,15 @@
 	{/if}
 </bb-helper>
 
-<style>
+<style id="bbStyle">
+	:root {
+		--bb-color:64;
+	}
 	.bar {
 		text-align:center;
 		font-size: 28px;
 		font-family: monospace;
-		background-color: hsla(64,68%, 67%,1);
+		background-color: hsla(var(--bb-color),68%, 67%,1);
 		padding: 10px 0 10px 0;
 		z-index:5;
 		box-shadow: 0 4px 18px #444;
@@ -85,7 +92,7 @@
 		visibility: hidden;
 	}
 	span:nth-of-type(1) {
-		color:limegreen;
+		color:#008a00;
 	}
 	span:nth-of-type(2) {
 		color:indianred;
@@ -103,7 +110,7 @@
 		}
 		.score--absolute {
 			top: 0;
-			width: 50px;
+			width: 30px;
 		}
 	}
 </style>
