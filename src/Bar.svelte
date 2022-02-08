@@ -21,7 +21,7 @@
 	}
 	export const get_timer = function () {
 		let t = document.getElementById('boardTimer')
-		return t ? t.getAttribute('data-timer') : 0
+		return t ? parseInt(t.getAttribute('data-timer')) : 0
 	}
 	export const set_color = function (x) {
 		let r = document.querySelector(':root');
