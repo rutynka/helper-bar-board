@@ -1,14 +1,16 @@
 {
   "name": "@rutynka/helper-bar-board",
   "author": "ru7ynk4",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Svelte super simple sticky bar with timer & counter. The easiest way to display text on the bar is through js public method",
-  "svelte": "src/main.js",
+  "svelte": "src/index.js",
   "module": "dist/bb.mjs",
-  "main": "dist/bb.js",
+  "main": "dist/index.js",
   "unpkg": "dist/bb.js",
+  "type": "module",
   "files": [
-    "dist/bb.js"
+    "src/index.js",
+    "Bar.svelte"
   ],
   "keywords": [
     "svelte",
