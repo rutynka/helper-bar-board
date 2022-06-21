@@ -38,7 +38,7 @@ function serve() {
 export default {
 	input: 'src/main.js',
 	output: [{
-		sourcemap: true,
+		sourcemap: false,
 		format: 'iife',
 		name: 'bb',
 		file: 'public/build/bb.js'

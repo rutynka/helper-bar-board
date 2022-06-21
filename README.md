@@ -6,7 +6,10 @@
 	<br>
 </h1>
 
-# Rutynka app helper
+# Rutynka bar board helper
+
+![npm](https://img.shields.io/npm/v/@rutynka/helper-progress?style=plastic)
+![NPM](https://img.shields.io/npm/l/@rutynka/helper-bar-board)
 
 This is a svelte bar board helper for [Rutynka](https://rutynka.io) apps.
 
