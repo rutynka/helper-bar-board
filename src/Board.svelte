@@ -20,11 +20,11 @@
 </script>
 
 {#if visible}
-    <span id="board" class="board--text" in:fly="{{ y: 200, duration: 2000 }}">{question}</span>
+    <span id="board" class="board--text" in:fly="{{ y: 200, duration: 2000 }}">{@html question}</span>
 {/if}
 
 <style>
-    .board--text {color:#222;display:block;}
+    .board--text {color:#222;display:block;flex-grow:2}
     @media only screen and (max-width: 480px) {
 
     }

@@ -1,4 +1,4 @@
-import App from './Bar.svelte';
+import App from './BarManager.svelte';
 let anchor = document.body.firstChild;
 if (document.getElementsByTagName('nav').length) {
 	anchor = document.getElementsByTagName('nav')[0].nextElementSibling
