@@ -3,69 +3,55 @@
 <script>
 	import Board from './Board.svelte'
 	import Timer from  './Timer.svelte'
-	export let question = ''
-	export let reset = false
-	export let set_timer = false
-	export let wrong_list = []
-	export let correct_list = []
-
-	let correct = 0
-	let wrong = 0
-	export const set_wrong = function(x, y) {
-		wrong_list.push([x, y])
-		wrong++
-	}
-	export const set_correct = function(x, y) {
-		correct_list.push([x, y])
-		correct++
-	}
-	export const get_timer = function () {
-		let t = document.getElementById('boardTimer')
-		return t ? parseInt(t.getAttribute('data-timer')) : 0
-	}
-	export const set_color = function (x) {
-		let r = document.querySelector(':root');
-		r.style.setProperty('--bb-color', x);
+	export let settingsJSON;
+	export let config;
+	
+	let s = {text:'',set_timer:false,progress:-1,progress_max:100}
+	
+	$: if (settingsJSON) {
+		
+		s = Object.assign({}, s, JSON.parse(settingsJSON));
+		// console.log('refresh each sec when timer running', s)
+		config = JSON.stringify(s)
 	}
 
-	$: question
-	$: correct
-	$: wrong
-	$: if (reset === true) {
-		console.log('reset')
-		correct = 0
-		wrong = 0
-		correct_list = []
-		wrong_list = []
-		question = ' '
-		set_timer = false
-		reset = false
-	}
-
-	console.log('bb helper v0.1.0')
+	console.log('bb helper v0.2.2')
 </script>
 
-<bb-helper id="bb">
-	{#if question}
-		<div id="bar" class="bar bar--display bar--sticky" data-domain="https://public.local">
-			<div id="boardCounters" class="score score--absolute">
-				<span id="correctCounter" >{correct}</span>
-				<span id="wrongCounter" class="{wrong ? '' : 'visibility'}" >{wrong}</span>
+<bb-helper>
+	{#if s.text}
+		<div style="background-color:hsla({s.color},68%, 67%,1 " class="bar bar-display bar-sticky bar-full">
+			<div class="board-counter score {s.correct > 0 || s.wrong > 0 ? '' : 'hidden'}">
+				<span class="correct-counter {s.correct > 0 ? '' : 'hidden'}" >{s.correct}</span>
+				<span class="wrong-counter {s.wrong > 0 ? '' : 'hidden'}" >{s.wrong}</span>
 			</div>
-			<Board {question} />
-			<Timer bind:start_timer={set_timer}/>
-			<div id="progressBar" class="bar--progress"></div>
+			<div class="{s.position > 0 ? 'pos' : 'hidden'}">{s.position}</div>
+			<Board bind:question={s.text} />
+			<Timer bind:timer={s.timer} bind:start_timer={s.set_timer}/>
 		</div>
+		<progress class="bar-progress {s.progress !== -1 ? '' : 'hidden'}" value="{s.progress}" max="{s.progress_max}"></progress>
 	{/if}
 </bb-helper>
 
-<style id="bbStyle">
+<style>
 	:root {
 		--bb-color:64;
 	}
+	::-moz-progress-bar {
+  		background-color: red;
+	}
+	::-webkit-progress-bar {
+  		background-color: orange;
+	}
+	progress {
+		width:99%;
+		height: 5px;
+    	vertical-align: 5px;
+		block-size:5px;
+	}
 	.bar {
 		text-align:center;
-		font-size: 28px;
+		font-size: 1.8rem;
 		font-family: monospace;
 		background-color: hsla(var(--bb-color),68%, 67%,1);
 		padding: 10px 0 10px 0;
@@ -73,29 +59,24 @@
 		box-shadow: 0 4px 18px #444;
 		min-height: 34px;
 	}
-	.bar--display {
+	.bar-display {
 		display: flex;
 		justify-content: center;
 	}
-	.score--absolute {
-		position:absolute;
-		left:0;
-		width:170px;
+	.bar-full {
+		width:100%
 	}
-	.bar--sticky {
-		position: sticky;
-		top: 0;
+	.bar-sticky {
 		width: 100%;
 		z-index:2;
 	}
-	.visibility {
-		visibility: hidden;
-	}
+	.pos {color:white; width:5vw;}
+	.hidden {display:none;}
 	span:nth-of-type(1) {
-		color:#008a00;
+		color: hsl(120, 90%, 40%);
 	}
 	span:nth-of-type(2) {
-		color:indianred;
+		color: hsl(0, 90%, 40%);
 	}
 
 	span {
@@ -107,10 +88,7 @@
 	@media only screen and (max-width: 480px) {
 		.bar {
 			font-size: 20px;
-		}
-		.score--absolute {
-			top: 0;
-			width: 30px;
+			height: 30px;;
 		}
 	}
 </style>

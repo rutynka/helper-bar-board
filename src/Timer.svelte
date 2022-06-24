@@ -16,9 +16,9 @@
     }
 
 </script>
-<div class="counter counter--options">
+<div class="counter counter-options">
     {#if timer !== 0}
-        <span data-timer={timer} class="timer" id="boardTimer">{timer} s</span>
+        <span data-timer={timer} class="timer">{timer} s</span>
     {/if}
 </div>
 
@@ -28,12 +28,13 @@
         position: absolute;
         right: 0;
     }
-    .counter--options {
+    .counter-options {
         color: white;
         z-index: 5;
+        padding: 0 10px;
     }
     @media only screen and (max-width: 480px) {
-        .counter--options {
+        .counter-options {
             font-size: 20px;
             top: 0;
         }

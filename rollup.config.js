@@ -41,7 +41,8 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'bb',
-		file: 'public/build/bb.js'
+		file: 'public/build/bb.js',
+		sourcemap: 'hidden'
 		},
 		{ file: pkg.module, 'format': 'es' },
 		{ file: pkg.main, 'format': 'umd', name }
