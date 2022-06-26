@@ -1,12 +1,13 @@
 <svelte:options accessors={true} />
 
 <script>
-	import Board from './Board.svelte'
+	import BarManager from './BarManager.svelte';
+import Board from './Board.svelte'
 	import Timer from  './Timer.svelte'
 	export let settingsJSON;
 	export let config;
 	
-	let s = {text:'',set_timer:false,progress:-1,progress_max:100}
+	let s = {text:'',set_timer:false,progress:-1,progress_max:100,img:false}
 	
 	$: if (settingsJSON) {
 		
@@ -15,7 +16,7 @@
 		config = JSON.stringify(s)
 	}
 
-	console.log('bb helper v0.2.2')
+	console.log('bb helper v0.2.3')
 </script>
 
 <bb-helper>
@@ -26,10 +27,17 @@
 				<span class="wrong-counter {s.wrong > 0 ? '' : 'hidden'}" >{s.wrong}</span>
 			</div>
 			<div class="{s.position > 0 ? 'pos' : 'hidden'}">{s.position}</div>
+			{#if s.img}<img alt="avatar" src="{s.img}">{/if}
 			<Board bind:question={s.text} />
 			<Timer bind:timer={s.timer} bind:start_timer={s.set_timer}/>
 		</div>
-		<progress class="bar-progress {s.progress !== -1 ? '' : 'hidden'}" value="{s.progress}" max="{s.progress_max}"></progress>
+		{#if s.progress !== -1}
+			<progress class="bar-progress {s.progress !== -1 ? '' : 'hidden'}"value="{s.progress}" max="{s.progress_max}"></progress>
+		{/if}
+		{#if s.progress === -1 && s.progress_max === 'undefined'}
+			<progress class="bar-progress" max="100"></progress>
+
+		{/if}
 	{/if}
 </bb-helper>
 
@@ -38,39 +46,36 @@
 		--bb-color:64;
 	}
 	::-moz-progress-bar {
-  		background-color: red;
+  		background-color: hsla(120,90%, 30%,1);
 	}
 	::-webkit-progress-bar {
-  		background-color: orange;
-	}
-	progress {
-		width:99%;
-		height: 5px;
-    	vertical-align: 5px;
-		block-size:5px;
+  		background-color: hsla(120,90%, 30%,1);
 	}
 	.bar {
 		text-align:center;
-		font-size: 1.8rem;
+		font-size: 2em;
 		font-family: monospace;
 		background-color: hsla(var(--bb-color),68%, 67%,1);
-		padding: 10px 0 10px 0;
+		padding: 10px 5px 10px 0;
 		z-index:5;
 		box-shadow: 0 4px 18px #444;
-		min-height: 34px;
+		max-height: 34px;
 	}
 	.bar-display {
 		display: flex;
 		justify-content: center;
 	}
-	.bar-full {
-		width:100%
-	}
 	.bar-sticky {
-		width: 100%;
 		z-index:2;
+		padding-left:5px
 	}
-	.pos {color:white; width:5vw;}
+	progress {
+		width:99.8%;
+		height: 5px;
+    	vertical-align: 5px;
+		block-size:5px;
+	}
+	.pos {color:white; width:3vw;}
 	.hidden {display:none;}
 	span:nth-of-type(1) {
 		color: hsl(120, 90%, 40%);
@@ -80,15 +85,11 @@
 	}
 
 	span {
-		width: 40%;
 		display: inline-block;
 		cursor:pointer;
 	}
 
 	@media only screen and (max-width: 480px) {
-		.bar {
-			font-size: 20px;
-			height: 30px;;
-		}
+		.pos {color:white; width:5vw;}
 	}
 </style>

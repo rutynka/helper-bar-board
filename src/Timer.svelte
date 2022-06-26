@@ -16,26 +16,35 @@
     }
 
 </script>
-<div class="counter counter-options">
-    {#if timer !== 0}
-        <span data-timer={timer} class="timer">{timer} s</span>
-    {/if}
-</div>
+{#if start_timer}
+    <div class="counter-options">
+        {#if timer !== 0}
+            <span  class="counter timer" data-timer={timer} >{timer}<span class="mobi"> s</span></span>
+        {/if}
+    </div>
+{/if}
 
 
 <style>
+    .counter-options {
+        position: relative;
+        padding:0 2vw;
+        color: white;
+        z-index: 5;
+    }
     .counter {
         position: absolute;
         right: 0;
     }
-    .counter-options {
-        color: white;
-        z-index: 5;
-        padding: 0 10px;
-    }
     @media only screen and (max-width: 480px) {
         .counter-options {
-            font-size: 20px;
+            padding:0 4vw;
+        }
+        .mobi {
+            display: none;
+        }
+        .counter-options {
+            font-size: 1em;
             top: 0;
         }
     }

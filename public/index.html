@@ -16,10 +16,46 @@
 <body>
 <nav></nav>
 <div id="userContent"></div>
-<h1 align="center">
+<h1 align="center" style="position: absolute;top:30%;left:40%;z-index:-1">
 	<a href="https://rutynka.io">
 		<img width="320" src="/rutynka_logo_micro.svg" alt="rutynka">
 	</a>
 </h1>
+<script>
+	
+	function delay(ms) {
+		return new Promise(resolve => setTimeout(resolve,ms));
+	}
+	async function tests() {
+			bb.init({settings:{text:'¯\_(ツ)_/¯',color:160,correct:1,wrong:1,position:1,set_timer:true}})
+			bb.init({settings:{text:'¯&#92;_͡° ͜ʖ ͡°_/¯',color:180,progress:0,correct:1,wrong:1,position:1,set_timer:true}})
+			bb.init({settings:{text:'¯&#92;_͡° ͜ʖ ͡°_/¯',color:190,progress:50,correct:2,wrong:1,position:2,set_timer:true}})
+			await delay(1000).then(() => { 
+				bb.set({text:'¯&#92;_(ツ)_/¯',correct:9999,wrong:9999,position:9999,set_timer:true})
+				
+			});
+			await delay(1000).then(() => { 
+				bb.init({mini:true,settings: {text:'¯&#92;_(ツ)_/¯',color:190,correct:39,wrong:11,position:10,set_timer:true}})
+				bb.init({mini:true,settings: {text:'¯&#92;( ͡~ ͜ʖ ͡°)_/¯',color:210,correct:49,wrong:22,position:20,set_timer:true}})
+				bb.init({mini:true,settings: {text:'¯&#92;( ͡~ ͜ʖ ͡°)_/¯',color:230,correct:59,wrong:33,position:30,set_timer:true}})
+				
+			});
+			await delay(1000).then(() => { 
+			
+				bb.init({mini:true,settings:{text:'martinez'}})
+				bb.init({mini:true,settings:{text:'martinez',color:60}})
+				bb.init({mini:true,settings:{text:'martinez',color:70,img:'martinez.svg'}})
+				bb.init({pos:4,mini:true,settings:{text:'martinez',color:80,progress_max:'undefined',img:'martinez.svg'}})
+				bb.init({pos:4,mini:true,settings:{position:1,text:'martinez',color:90,progress:10,img:'martinez.svg'}})
+				bb.init({pos:4,mini:true,settings:{correct:666,wrong:22,position:2,text:'martinez',color:100,progress:20,img:'martinez.svg'}})
+				bb.init({pos:4,mini:true,settings:{correct:777,wrong:333,position:3,text:'martinez',color:110,progress:30,img:'martinez.svg',set_timer:true}})
+				bb.init({pos:4,mini:true,settings:{correct:888,wrong:4444,position:4,text:'garcia',color:130,progress:50,img:'garcia.svg',set_timer:true}})
+				bb.init({pos:4,mini:true,settings:{correct:999,wrong:55555,position:5,text:'johnson',color:150,progress:90,img:'johnson.svg',set_timer:true}})
+				bb.init({pos:4,mini:true,settings:{correct:12345,wrong:666666,position:6,text:'rodriguez garcia johnson',color:170,progress:90,img:'rodriguez.svg',set_timer:true}})
+			});
+	}
+	document.body.addEventListener('bbchange', (e) => console.log("event -> bar id:", e.detail.id, e.detail.bb.text));
+	window.addEventListener('DOMContentLoaded', tests)
+</script>
 </body>
 </html>
