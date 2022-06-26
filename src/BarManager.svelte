@@ -1,10 +1,6 @@
 <svelte:options accessors={true} />
 
 <script>
-	// a) bb.init({settings:{text:'¯&#92;_(ツ)_/¯',color:77,correct:199,wrong:11,position:10,set_timer:true}})
-	// b) bb.set({text:'¯\_(ツ)_/¯',correct:0,wrong:0,position:10,set_timer:true})
-	// c) bb.init({mini:true,settings: {text:'¯&#92;_(ツ)_/¯',color:200,correct:399,wrong:11,position:10,set_timer:true}})
-
 	import Bar from './Bar.svelte'
 	let mini = 'left'
 	let ids = []
@@ -23,7 +19,6 @@
 	export let correct_list = []
 
 	function getFirstFreeID () {
-		// let sequence = [...Array(100).keys()]
 		let i =0;
 		while (true) {
 			if (!ids.includes(i)) {
@@ -34,13 +29,16 @@
 			i++;
 		}
 	}
-	//cant pass obj - use string obj instead ;)
+	//cant pass obj - used string obj instead ;)
 	export const set = function(obj,id = 0) {
 		if (!elements.length || elements.length < id + 1) {
 			return
 		}
-		elements[id].settings = JSON.stringify(Object.assign(JSON.parse(elements[id].settings),obj))
+		const merge = Object.assign(JSON.parse(elements[id].settings),obj)
+		elements[id].settings = JSON.stringify(merge)
 		elements = elements
+		const bbChange = new CustomEvent('bbchange', {detail: {id:id, bb:merge}})
+		document.body.dispatchEvent(bbChange)
 	}
 	export const init = function(bb) {
 		bb.id = getFirstFreeID();
@@ -49,13 +47,13 @@
 		elements.push(bb)
 		configState.push(bb)
 		elements = [...elements];
-		console.log('add bar data obj', elements)
+		console.log('init bar data obj', elements)
 		return bb.id
 	}
 	export const get = function(prop = 'text',value = 0) {
 		if (!configState.length) {
 			console.debug(configState)
-			return 'undefined'
+			return 'no prop'
 		}
 		if (prop === 'debug') {
 			return configState
@@ -67,6 +65,10 @@
 		ids = ids.filter(el => {return el != id})
 		elements = elements.filter(el => { return el.id !== id})
 		// @todo - should delete configState by id not all! 
+		configState.length = 0
+	}
+	export const delAll = function() {
+		elements.length = 0
 		configState.length = 0
 	}
 	export const justify_mini = function(value) {
@@ -90,7 +92,7 @@
 		{/if}
 	{/each}
 </div>
-<div class="mini-display sticky" style="justify-content:{mini}">
+<div class="mini-display sticky mini-size" style="justify-content:{mini}">
 	{#each elements as el (el.id) }
 		{#if el.mini}
 			<Bar bind:config={configState[el.id]} bind:settingsJSON={el.settings}/>
@@ -98,6 +100,8 @@
 	{/each}
 </div>
 <style>
+	.mini-size {font-size: 0.5rem;}
+	:global(.mini-size img {max-height: 20px;})
 	.sticky {position: sticky; top:0;}	
 	.mini-display {display: flex;flex-wrap: wrap;}
 </style>
