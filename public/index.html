@@ -27,20 +27,22 @@
 		return new Promise(resolve => setTimeout(resolve,ms));
 	}
 	async function tests() {
-			bb.init({settings:{text:'¯\_(ツ)_/¯',color:160,correct:1,wrong:1,position:1,set_timer:true}})
-			bb.init({settings:{text:'¯&#92;_͡° ͜ʖ ͡°_/¯',color:180,progress:0,correct:1,wrong:1,position:1,set_timer:true}})
-			bb.init({settings:{text:'¯&#92;_͡° ͜ʖ ͡°_/¯',color:190,progress:50,correct:2,wrong:1,position:2,set_timer:true}})
-			await delay(1000).then(() => { 
-				bb.set({text:'¯&#92;_(ツ)_/¯',correct:9999,wrong:9999,position:9999,set_timer:true})
+			bb.init({settings:{text:'¯\_(ツ)_/¯',color:160,correct:1,wrong:1,position:1}})
+			bb.init({settings:{text:'¯&#92;_͡° ͜ʖ ͡°_/¯',color:180,progress:0,correct:1,wrong:1,position:1,start_timer:true, timer_visible:true}})
+			bb.init({settings:{text:'¯&#92;_͡° ͜ʖ ͡°_/¯',color:190,progress:50,correct:2,wrong:1,position:2}})
+			bb.init({settings:{text:'bye bye',img:'martinez.svg', color:200,progress:50,correct:2,wrong:1,position:2,start_timer:true}})
+			await delay(2000).then(() => { 
+				bb.set({text:'¯&#92;_(ツ)_/¯',correct:9999,wrong:9999,position:9999,start_timer:true,timer_visible:true})
+				bb.set({start_timer:true, timer_visible:true},2)
 				
 			});
-			await delay(1000).then(() => { 
-				bb.init({mini:true,settings: {text:'¯&#92;_(ツ)_/¯',color:190,correct:39,wrong:11,position:10,set_timer:true}})
-				bb.init({mini:true,settings: {text:'¯&#92;( ͡~ ͜ʖ ͡°)_/¯',color:210,correct:49,wrong:22,position:20,set_timer:true}})
-				bb.init({mini:true,settings: {text:'¯&#92;( ͡~ ͜ʖ ͡°)_/¯',color:230,correct:59,wrong:33,position:30,set_timer:true}})
+			await delay(2500).then(() => { 
+				bb.init({mini:true,settings: {text:'¯&#92;_(ツ)_/¯',color:195,correct:39,wrong:11,position:10,timer:true}})
+				bb.init({mini:true,settings: {text:'¯&#92;( ͡~ ͜ʖ ͡°)_/¯',color:210,correct:49,wrong:22,position:20,start_timer:true}})
+				bb.init({mini:true,settings: {text:'¯&#92;( ͡~ ͜ʖ ͡°)_/¯',color:230,correct:59,wrong:33,position:30,start_timer:true}})
 				
 			});
-			await delay(1000).then(() => { 
+			await delay(3000).then(() => { 
 			
 				bb.init({mini:true,settings:{text:'martinez'}})
 				bb.init({mini:true,settings:{text:'martinez',color:60}})
@@ -48,10 +50,16 @@
 				bb.init({pos:4,mini:true,settings:{text:'martinez',color:80,progress_max:'undefined',img:'martinez.svg'}})
 				bb.init({pos:4,mini:true,settings:{position:1,text:'martinez',color:90,progress:10,img:'martinez.svg'}})
 				bb.init({pos:4,mini:true,settings:{correct:666,wrong:22,position:2,text:'martinez',color:100,progress:20,img:'martinez.svg'}})
-				bb.init({pos:4,mini:true,settings:{correct:777,wrong:333,position:3,text:'martinez',color:110,progress:30,img:'martinez.svg',set_timer:true}})
-				bb.init({pos:4,mini:true,settings:{correct:888,wrong:4444,position:4,text:'garcia',color:130,progress:50,img:'garcia.svg',set_timer:true}})
-				bb.init({pos:4,mini:true,settings:{correct:999,wrong:55555,position:5,text:'johnson',color:150,progress:90,img:'johnson.svg',set_timer:true}})
-				bb.init({pos:4,mini:true,settings:{correct:12345,wrong:666666,position:6,text:'rodriguez garcia johnson',color:170,progress:90,img:'rodriguez.svg',set_timer:true}})
+				bb.init({pos:4,mini:true,settings:{correct:777,wrong:333,position:3,text:'martinez',color:110,progress:30,img:'martinez.svg',timer_visible:true, start_timer:true}})
+				bb.init({pos:4,mini:true,settings:{correct:888,wrong:4444,position:4,text:'garcia',color:130,progress:50,img:'garcia.svg',timer_visible:true, start_timer:true}})
+				bb.init({pos:4,mini:true,settings:{correct:999,wrong:55555,position:5,text:'johnson',color:150,progress:90,img:'johnson.svg',start_timer:true}})
+				bb.init({pos:4,mini:true,settings:{correct:12345,wrong:666666,position:6,text:'rodriguez garcia johnson',color:170,progress:90,img:'rodriguez.svg',start_timer:true}})
+			});
+			await delay(3000).then(() => { 
+				bb.set({text:'timer stopped',start_timer:false},2)
+			});
+			await delay(7000).then(() => { 
+				bb.del(3)
 			});
 	}
 	document.body.addEventListener('bbchange', (e) => console.log("event -> bar id:", e.detail.id, e.detail.bb.text));

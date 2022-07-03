@@ -1,6 +1,7 @@
 <script>
-    export let start_timer
+    export let start_timer = false
     export let timer = 0;
+    export let timer_visible = true;
     let interval = {}
 
     $: start_timer ? start() : stop()
@@ -16,7 +17,7 @@
     }
 
 </script>
-{#if start_timer}
+{#if timer_visible}
     <div class="counter-options">
         {#if timer !== 0}
             <span  class="counter timer" data-timer={timer} >{timer}<span class="mobi"> s</span></span>

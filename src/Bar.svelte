@@ -1,22 +1,20 @@
-<svelte:options accessors={true} />
-
 <script>
-	import BarManager from './BarManager.svelte';
-import Board from './Board.svelte'
+	import Board from './Board.svelte'
 	import Timer from  './Timer.svelte'
 	export let settingsJSON;
 	export let config;
 	
-	let s = {text:'',set_timer:false,progress:-1,progress_max:100,img:false}
+	let configDefault = {text:'',start_timer:false,progress:-1,progress_max:100,img:false}
+	let s = {...configDefault}
 	
 	$: if (settingsJSON) {
-		
-		s = Object.assign({}, s, JSON.parse(settingsJSON));
-		// console.log('refresh each sec when timer running', s)
-		config = JSON.stringify(s)
+		let parsedSetting = JSON.parse(settingsJSON)
+			s = Object.assign({}, s, parsedSetting);
+			// console.log('refresh each sec when timer running', s)
+			config = JSON.stringify(s)
 	}
 
-	console.log('bb helper v0.2.3')
+	console.log('bb helper v0.2.0')
 </script>
 
 <bb-helper>
@@ -27,9 +25,9 @@ import Board from './Board.svelte'
 				<span class="wrong-counter {s.wrong > 0 ? '' : 'hidden'}" >{s.wrong}</span>
 			</div>
 			<div class="{s.position > 0 ? 'pos' : 'hidden'}">{s.position}</div>
-			{#if s.img}<img alt="avatar" src="{s.img}">{/if}
+			{#if s.img}<img class="avatar" alt="avatar" src="{s.img}">{/if}
 			<Board bind:question={s.text} />
-			<Timer bind:timer={s.timer} bind:start_timer={s.set_timer}/>
+			<Timer bind:timer={s.timer} bind:timer_visible={s.timer_visible} bind:start_timer={s.start_timer}/>
 		</div>
 		{#if s.progress !== -1}
 			<progress class="bar-progress {s.progress !== -1 ? '' : 'hidden'}"value="{s.progress}" max="{s.progress_max}"></progress>
@@ -42,6 +40,7 @@ import Board from './Board.svelte'
 </bb-helper>
 
 <style>
+	.avatar {max-height:24px;padding-right: 10px;}
 	:root {
 		--bb-color:64;
 	}

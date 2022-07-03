@@ -1,4 +1,4 @@
-<svelte:options accessors={true} />
+<svelte:options accessors={true}/>
 
 <script>
 	import Bar from './Bar.svelte'
@@ -13,10 +13,6 @@
 	let configState = [
 		// {},{},{},{}
 	]
-	let correct = 0
-	let wrong = 0
-	export let wrong_list = []
-	export let correct_list = []
 
 	function getFirstFreeID () {
 		let i =0;
@@ -52,17 +48,17 @@
 	}
 	export const get = function(prop = 'text',value = 0) {
 		if (!configState.length) {
-			console.debug(configState)
+			console.debug(configState,elements,ids)
 			return 'no prop'
 		}
-		if (prop === 'debug') {
+		if (prop === 'debug' || !configState[value] ) {
 			return configState
 		}
 		let obj = JSON.parse(configState[value])
 		return obj[prop]
 	}
 	export const del = function(id = 0) {
-		ids = ids.filter(el => {return el != id})
+		ids = ids.filter(el => {return el !== id})
 		elements = elements.filter(el => { return el.id !== id})
 		// @todo - should delete configState by id not all! 
 		configState.length = 0
@@ -75,24 +71,16 @@
 		mini = value;
 	}
 
-	export const set_wrong = function(x, y) {
-		wrong_list.push([x, y])
-		wrong++
-	}
-	export const set_correct = function(x, y) {
-		correct_list.push([x, y])
-		correct++
-	}
 	
 </script>
-<div class="full-display sticky">
+<div class="full-wrapper sticky">
 	{#each elements as el (el.id) }
 		{#if !el.mini}
 			<Bar bind:config={configState[el.id]} bind:settingsJSON={el.settings}/>
 		{/if}
 	{/each}
 </div>
-<div class="mini-display sticky mini-size" style="justify-content:{mini}">
+<div class="mini-wrapper sticky mini-size" style="justify-content:{mini}">
 	{#each elements as el (el.id) }
 		{#if el.mini}
 			<Bar bind:config={configState[el.id]} bind:settingsJSON={el.settings}/>
@@ -100,8 +88,9 @@
 	{/each}
 </div>
 <style>
+	.full-wrapper {z-index:5}
+	.mini-wrapper {z-index:6}
 	.mini-size {font-size: 0.5rem;}
-	:global(.mini-size img {max-height: 20px;})
 	.sticky {position: sticky; top:0;}	
-	.mini-display {display: flex;flex-wrap: wrap;}
+	.mini-wrapper {display: flex;flex-wrap: wrap;}
 </style>
