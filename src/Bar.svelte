@@ -19,7 +19,7 @@
 
 <bb-helper>
 	{#if s.text}
-		<div style="background-color:hsla({s.color},68%, 67%,1 " class="bar bar-display bar-sticky bar-full">
+		<div style="background-color:hsla({s.color},68%, 67%,1)" class="bar bar-display bar-sticky bar-full">
 			<div class="board-counter score {s.correct > 0 || s.wrong > 0 ? '' : 'hidden'}">
 				<span class="correct-counter {s.correct > 0 ? '' : 'hidden'}" >{s.correct}</span>
 				<span class="wrong-counter {s.wrong > 0 ? '' : 'hidden'}" >{s.wrong}</span>

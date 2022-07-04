@@ -40,19 +40,16 @@
 		bb.id = getFirstFreeID();
 		let settingsPassString = JSON.stringify(bb.settings)
 		bb.settings = settingsPassString;
-		elements.push(bb)
-		configState.push(bb)
+		elements.splice(bb.id,0,bb)
+		configState.splice(bb.id,0,bb)
 		elements = [...elements];
 		console.log('init bar data obj', elements)
 		return bb.id
 	}
 	export const get = function(prop = 'text',value = 0) {
-		if (!configState.length) {
+		if (prop === 'debug' || !configState.length || !configState[value]) {
 			console.debug(configState,elements,ids)
-			return 'no prop'
-		}
-		if (prop === 'debug' || !configState[value] ) {
-			return configState
+			return false
 		}
 		let obj = JSON.parse(configState[value])
 		return obj[prop]
