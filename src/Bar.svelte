@@ -14,7 +14,6 @@
 			config = JSON.stringify(s)
 	}
 
-	console.log('bb helper v0.2.0')
 </script>
 
 <bb-helper>
@@ -40,7 +39,7 @@
 </bb-helper>
 
 <style>
-	.avatar {max-height:24px;padding-right: 10px;}
+	.avatar {max-height:24px;padding-right: 10px;margin-top:-5px;}
 	:root {
 		--bb-color:64;
 	}

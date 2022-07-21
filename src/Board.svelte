@@ -1,26 +1,16 @@
 <script>
-    import { fly } from 'svelte/transition';
+    import { fade,fly } from 'svelte/transition';
     export let question = '';
     let visible = false;
-    // function anime() {
-    //     let el = document.getElementById('board')
-    //     if (el) {
-    //         el.classList.add('board--fade');
-    //         console.log('color transparent')
-    //         setTimeout(()=>{
-    //             document.getElementById('board').classList.remove('board--fade');
-    //         }, 25000);
-    //
-    //     }
-    // }
     $: question = (() => {
-        visible = true
+        visible = false
+        setTimeout(() => {visible = true},200)
         return question
     })()
 </script>
 
 {#if visible}
-    <span id="board" class="board--text" in:fly="{{ y: 200, duration: 2000 }}">{@html question}</span>
+    <span class="board--text" in:fly="{{ y: 200, duration: 1300 }}" out:fade>{@html question}</span>
 {/if}
 
 <style>

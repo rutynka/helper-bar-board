@@ -16,7 +16,7 @@
 <body>
 <nav></nav>
 <div id="userContent"></div>
-<h1 align="center" style="position: absolute;top:30%;left:40%;z-index:-1">
+<h1 align="center">
 	<a href="https://rutynka.io">
 		<img width="320" src="/rutynka_logo_micro.svg" alt="rutynka">
 	</a>
@@ -27,7 +27,10 @@
 		return new Promise(resolve => setTimeout(resolve,ms));
 	}
 	async function tests() {
-			bb.init({settings:{text:'¯\_(ツ)_/¯',color:160,correct:1,wrong:1,position:1}})
+			bb.init({settings:{text:'🌭',color:80,}})
+			bb.init({settings:{text:'♟️',color:100,correct:1}})
+			bb.init({settings:{text:'¯\_(ツ)_/¯',color:120,wrong:1}})
+			bb.init({settings:{text:'¯\_(ツ)_/¯',color:140,correct:1,wrong:1,position:1}})
 			bb.init({settings:{text:'¯&#92;_͡° ͜ʖ ͡°_/¯',color:180,progress:0,correct:1,wrong:1,position:1,start_timer:true, timer_visible:true}})
 			bb.init({settings:{text:'¯&#92;_͡° ͜ʖ ͡°_/¯',color:190,progress:50,correct:2,wrong:1,position:2}})
 			bb.init({settings:{text:'bye bye',img:'martinez.svg', color:200,progress:50,correct:2,wrong:1,position:2,start_timer:true}})
@@ -58,8 +61,11 @@
 			await delay(3000).then(() => { 
 				bb.set({text:'timer stopped',start_timer:false},2)
 			});
-			await delay(7000).then(() => { 
+			await delay(3000).then(() => { 
 				bb.del(3)
+			});
+			await delay(3000).then(() => { 
+				bb.justify_mini('center')
 			});
 	}
 	document.body.addEventListener('bbchange', (e) => console.log("event -> bar id:", e.detail.id, e.detail.bb.text));
