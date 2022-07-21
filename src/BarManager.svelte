@@ -19,14 +19,15 @@
 		while (true) {
 			if (!ids.includes(i)) {
 				ids.push(i)
-				return i
 				break;
 			}
 			i++;
 		}
+		return i
 	}
 	//cant pass obj - used string obj instead ;)
 	export const set = function(obj,id = 0) {
+		if (id === -1 ) return 'init bar first'
 		if (!elements.length || elements.length < id + 1) {
 			return
 		}
@@ -36,12 +37,27 @@
 		const bbChange = new CustomEvent('bbchange', {detail: {id:id, bb:merge}})
 		document.body.dispatchEvent(bbChange)
 	}
+
+	export const setBySearchKnownValue = function(searchAndSet) {
+		const search = searchAndSet[0]
+		const searchKey = Object.keys(search)[0]
+		const searchValue = Object.values(search)[0]
+		for (const bar of elements) {
+			let barSettings = JSON.parse(bar.settings)
+			for (const s in barSettings) {
+				if (s === searchKey && barSettings[s] === searchValue) {
+					set(searchAndSet[1], bar.id)
+					break
+				}
+			}
+		}
+	}
 	export const init = function(bb) {
 		bb.id = getFirstFreeID();
 		let settingsPassString = JSON.stringify(bb.settings)
 		bb.settings = settingsPassString;
 		elements.splice(bb.id,0,bb)
-		configState.splice(bb.id,0,bb)
+		configState.splice(bb.id,0,settingsPassString)
 		elements = [...elements];
 		console.log('init bar data obj', elements)
 		return bb.id
@@ -68,7 +84,7 @@
 		mini = value;
 	}
 
-	
+	console.log('bb helper v0.2.5')
 </script>
 <div class="full-wrapper sticky">
 	{#each elements as el (el.id) }
@@ -85,9 +101,9 @@
 	{/each}
 </div>
 <style>
-	.full-wrapper {z-index:5}
-	.mini-wrapper {z-index:6}
-	.mini-size {font-size: 0.5rem;}
+	.full-wrapper {z-index:7}
+	.mini-wrapper {z-index:5}
+	.mini-size {font-size: 0.3rem;}
 	.sticky {position: sticky; top:0;}	
 	.mini-wrapper {display: flex;flex-wrap: wrap;}
 </style>
