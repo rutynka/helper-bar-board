@@ -1,1 +1,1 @@
-export { default } from './Bar.svelte'
+export { default } from './BarManager.svelte'
