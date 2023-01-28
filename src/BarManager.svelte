@@ -84,7 +84,7 @@
 		mini = value;
 	}
 
-	console.log('bb helper v0.2.5')
+	console.log('bb helper v0.2.7')
 </script>
 <div class="full-wrapper sticky">
 	{#each elements as el (el.id) }

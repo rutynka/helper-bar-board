@@ -49,24 +49,26 @@ If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommen
 npx degit sveltejs/template my-svelte-project
 cd my-svelte-project
 yarn install
-yarn install rutynka/helper-bar-board
-yarn dev 
+yarn add rutynka/helper-bar-board@^0.2.7
+yarn dev
+http://localhost:8080/
 ```
 
 ```js
 <script>
-	import Bar from '@rutynka/helper-bar-board/src/Bar.svelte'
+	import BarManager from '@rutynka/helper-bar-board'
 	export let name;
 
 	let bb;
 	function handleClick() {
-		bb.set({text:"Bombay Engineer Group"},3) 
+		let id = bb.init({settings:{text:'init 🌭 + 🌭 =',color:80,}})
+		bb.set({text:'🌭🌭',color:110,},id)
 		console.log('click')
 	}
 </script>
 
 <main>
-	<Bar bind:this={bb}/>
+	<BarManager bind:this={bb}/>
 	<h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 	<button on:click={handleClick}>Show bar</button>
