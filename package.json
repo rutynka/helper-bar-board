@@ -1,8 +1,8 @@
 {
   "name": "@rutynka/helper-bar-board",
   "author": "ru7ynk4",
-  "version": "0.1.0",
-  "description": "A simple sticky bar with timer & counter made with Svelte. The easiest way to display text on the bar is through js public method",
+  "version": "0.2.5",
+  "description": "A Svelte simple bar with timer & counter",
   "svelte": "src/index.js",
   "module": "dist/bb.mjs",
   "main": "dist/index.js",

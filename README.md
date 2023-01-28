@@ -17,7 +17,7 @@ This is a svelte bar board helper for [Rutynka](https://rutynka.io) apps.
 
 https://helper-bar-board.vercel.app/
 
-`bb.question  = 'Bombay Engineer Group'` in Web Inspector
+`bb.set({text:"NPM package with Bombay Engineer Group"},3)` in Web Inspector
 
 ## Get started
 
@@ -48,8 +48,8 @@ If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommen
 ```bash
 npx degit sveltejs/template my-svelte-project
 cd my-svelte-project
-npm install
-yarn install rutynka/helper-progress-calendar
+yarn install
+yarn install rutynka/helper-bar-board
 yarn dev 
 ```
 
@@ -60,8 +60,7 @@ yarn dev
 
 	let bb;
 	function handleClick() {
-		bb.question = 'Bombay Engineer Group'
-		bb.set_timer = true
+		bb.set({text:"Bombay Engineer Group"},3) 
 		console.log('click')
 	}
 </script>
