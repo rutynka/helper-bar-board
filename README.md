@@ -49,7 +49,7 @@ If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommen
 npx degit sveltejs/template my-svelte-project
 cd my-svelte-project
 yarn install
-yarn add rutynka/helper-bar-board@^0.2.7
+yarn add @rutynka/helper-bar-board@^0.2.8
 yarn dev
 http://localhost:8080/
 ```

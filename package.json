@@ -1,7 +1,7 @@
 {
   "name": "@rutynka/helper-bar-board",
   "author": "ru7ynk4",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "A simple Svelte app - sticky bar with timer & counter",
   "svelte": "src/index.js",
   "module": "dist/bb.mjs",
